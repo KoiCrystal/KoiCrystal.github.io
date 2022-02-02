@@ -32,5 +32,6 @@ deploy:
   type: git
   repo: <your_repo_address>
 ```
-
+其实还有一句`branch: master`，但是不写这一句可以直接默认。  
+之后在pages的设置里修改source为`master`分支
 
