@@ -49,5 +49,10 @@ deploy:
 根据官网说法，在根目录创建名为`_config.next.yml`的文件，并将`/themes/next/_config.yml`的内容复制过去。
 虽然不知道要不要在`_config.yml`中修改为`theme: next`，但是改了总没错。
 
+# 发文章
+现在发文章就不像Jekyll一样直接push上去就完事了，要现在本地hexo生成一下。
+`hexo generate`或简写为`hexo g`
+`hexo deploy`或简写为`hexo d`
+
 # 跨设备使用
 留个坑吧，换电脑的时候再说
