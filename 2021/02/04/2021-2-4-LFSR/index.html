@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="线性反馈移位寄存器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LFSR">
+<meta property="og:url" content="http://example.com/2021/02/04/2021-2-4-LFSR/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="线性反馈移位寄存器">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.827Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/02/04/2021-2-4-LFSR/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/02/04/2021-2-4-LFSR/","path":"2021/02/04/2021-2-4-LFSR/","title":"LFSR"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LFSR | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B1%82%E6%9C%80%E5%88%9D%E7%9A%84%E5%BA%8F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">求最初的序列</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/04/2021-2-4-LFSR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LFSR
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-04 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-04T00:00:00+08:00">2021-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">线性反馈移位寄存器</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="求最初的序列"><a href="#求最初的序列" class="headerlink" title="求最初的序列"></a>求最初的序列</h1><p>题目源代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">&quot;bxsyyds&#123;xxxxxxx&#125;&quot;</span></span><br><span class="line"><span class="keyword">assert</span> flag.startswith(<span class="string">&quot;bxsyyds&#123;&quot;</span>)</span><br><span class="line"><span class="keyword">assert</span> flag.endswith(<span class="string">&quot;&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">assert</span> <span class="built_in">len</span>(flag)==<span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lfsr</span>(<span class="params">R,mask</span>):</span></span><br><span class="line">    output = (R &lt;&lt; <span class="number">1</span>) &amp; <span class="number">0xfffffff</span></span><br><span class="line">    i=(R&amp;mask)&amp;<span class="number">0xfffffff</span></span><br><span class="line">    lastbit=<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i!=<span class="number">0</span>:</span><br><span class="line">        lastbit^=(i&amp;<span class="number">1</span>)</span><br><span class="line">        i=i&gt;&gt;<span class="number">1</span></span><br><span class="line">    output^=lastbit </span><br><span class="line">    <span class="keyword">return</span> (output,lastbit)</span><br><span class="line"></span><br><span class="line">R=<span class="built_in">int</span>(flag[<span class="number">8</span>:-<span class="number">1</span>],<span class="number">16</span>)					<span class="comment">#把16进制转化为10进制</span></span><br><span class="line">mask=<span class="number">0b1001000000100000001000100101</span></span><br><span class="line">f=<span class="built_in">open</span>(<span class="string">&quot;result&quot;</span>,<span class="string">&quot;w&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    tmp=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">        (R,out)=lfsr(R,mask)</span><br><span class="line">        tmp=(tmp &lt;&lt; <span class="number">1</span>)^out</span><br><span class="line">    f.write(<span class="built_in">chr</span>(tmp))</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<p>  大致说明一下这段代码，写的还没有我密码学课设写得好，三行能写完的东西非要写十几行，害  </p>
+<p><code>output = (R &lt;&lt; 1) &amp; 0xfffffff</code>就是左移一位，最低位补零，用<code>&amp; 0xfffffff</code>取低32位，这时候最低位是0而非反馈结果  </p>
+<p><code>i=(R&amp;mask)&amp;0xfffffff</code>就是加上抽头的反馈了，在原序列基础上写成了一个序列  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lastbit=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (i!=<span class="number">0</span>):</span><br><span class="line">	lastbit^=(i&amp;<span class="number">1</span>) <span class="comment"># (i&amp;1)取i的最后一位</span></span><br><span class="line">	i=i&gt;&gt;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>  这就是求反馈了，把i一位一位的异或求得lastbit  </p>
+<p>  <code>output^=lastbit</code>把结果和lastbit异或，修改最后一位为反馈结果。output就是新序列，lastbit就是输出的。这时候要注意一点，这个lastbit并不是对应的序列输出的，lastbit是最新一位，输出的应该是最老的一位，但是毕竟大家都是有周期的，不是正着对应也是斜着对应了  </p>
+<p>  最后在主函数，输出了800位的二进制序列（每次循环j，最大值为255，即8位二进制数。其实最后的800位就是连续输出）  </p>
+<p>  之后就开始解题了，先把result文件中的数据转为二进制。可以先用16进制打开，然后用<code>bin(int(result,16))</code>转为2进制(注意用的时候是str格式，不要带<code>0b</code>)  </p>
+<p>  已知本源多项式是n次的。假设我们现在要求第n个输出时，初始序列R已经左移了n-1次，即可求出初始R的第n位  </p>
+<p>  为了举例方便，我们取n&#x3D;3做说明，本源多项式为<code>x^3+x+1</code>，其每一步分别为：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">100(初始值)</span><br><span class="line">001</span><br><span class="line">011</span><br><span class="line">111</span><br><span class="line">110</span><br><span class="line">101</span><br><span class="line">010</span><br><span class="line">100</span><br><span class="line">按照上面运算方法得到的输出序列：1110100……</span><br></pre></td></tr></table></figure><br>  求第3个输出时，我们已经完成了两次移位和输出，且已知前两个输出为11，第一个1对应此时序列中第二位，第二个1是最低位。此时最高位是原序列最后一个没有输出的值，我们设为x  </p>
+<p>  我们从一长串输出中知道第三个输出为1，x⊕1&#x3D;1，即x&#x3D;0，原序列的R第3位为0  </p>
+<p>  按照这种方法，我们逐步向前反推，求出原序列R  </p>
+<p>  解密脚本：<br>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mask = <span class="string">&#x27;&#x27;</span>		<span class="comment">#反馈函数，这两个都是str格式</span></span><br><span class="line">result =<span class="string">&#x27;&#x27;</span> 		<span class="comment">#输出序列</span></span><br><span class="line">tmp=result </span><br><span class="line">R = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(mask)):     </span><br><span class="line">    output = <span class="string">&#x27;?&#x27;</span> + result[:<span class="built_in">len</span>(mask)-<span class="number">1</span>] </span><br><span class="line">    ans = <span class="built_in">int</span>(tmp[<span class="built_in">len</span>(mask)-<span class="number">1</span>-i])^<span class="built_in">int</span>(output[-<span class="number">1</span>])^<span class="built_in">int</span>(output[-<span class="number">3</span>])^<span class="built_in">int</span>(output[-<span class="number">6</span>])^<span class="built_in">int</span>(output[-<span class="number">10</span>])^<span class="built_in">int</span>(output[-<span class="number">18</span>])^<span class="built_in">int</span>(output[-<span class="number">25</span>]) </span><br><span class="line">    R += <span class="built_in">str</span>(ans)</span><br><span class="line">    result = <span class="built_in">str</span>(ans) + result[:<span class="built_in">len</span>(mask)-<span class="number">1</span>] </span><br><span class="line">R = <span class="built_in">format</span>(<span class="built_in">int</span>(R[::-<span class="number">1</span>],<span class="number">2</span>),<span class="string">&#x27;x&#x27;</span>) </span><br><span class="line"><span class="comment"># [::-1]反向;&#x27;x&#x27;转化为16进制，因为题目中是16进制(上面题目代码中写注释的地方)</span></span><br><span class="line">flag = <span class="string">&quot;bxsyyds&#123;&quot;</span> + R + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span> (flag)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Crypto/" rel="tag"># Crypto</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/03/2021-2-3-AES/" rel="prev" title="AES">
+                  <i class="fa fa-chevron-left"></i> AES
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/09/2021-2-9-%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84SQL/" rel="next" title="有意思的SQL">
+                  有意思的SQL <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

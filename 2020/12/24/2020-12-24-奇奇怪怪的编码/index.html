@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="CTF真的是什么奇奇怪怪的编码都有，记录一下各种编码和解题网站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="奇奇怪怪的密码">
+<meta property="og:url" content="http://example.com/2020/12/24/2020-12-24-%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CTF真的是什么奇奇怪怪的编码都有，记录一下各种编码和解题网站">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.824Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Misc">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/12/24/2020-12-24-%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/12/24/2020-12-24-%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/","path":"2020/12/24/2020-12-24-奇奇怪怪的编码/","title":"奇奇怪怪的密码"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>奇奇怪怪的密码 | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%B1%E6%98%AF%E4%B8%BA%E4%BA%86%E7%8E%A9%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">就是为了玩的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4"><span class="nav-number">1.1.</span> <span class="nav-text">箭头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%B1%E6%9C%B5"><span class="nav-number">1.2.</span> <span class="nav-text">花朵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#emoji%EF%BC%88base100%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">emoji（base100）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9F%B3%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">音符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%97%B7%E5%91%9C"><span class="nav-number">1.5.</span> <span class="nav-text">嗷呜~</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aa%E7%BC%96%E7%A0%81"><span class="nav-number">1.6.</span> <span class="nav-text">aa编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E9%94%AE%E5%AF%86%E7%A0%81"><span class="nav-number">1.7.</span> <span class="nav-text">9键密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#base%E5%AE%B6%E6%97%8F"><span class="nav-number">2.</span> <span class="nav-text">base家族</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#base64"><span class="nav-number">2.1.</span> <span class="nav-text">base64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base32"><span class="nav-number">2.2.</span> <span class="nav-text">base32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base16"><span class="nav-number">2.3.</span> <span class="nav-text">base16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base58"><span class="nav-number">2.4.</span> <span class="nav-text">base58</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/24/2020-12-24-%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          奇奇怪怪的密码
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-24 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-24T00:00:00+08:00">2020-12-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">CTF真的是什么奇奇怪怪的编码都有，记录一下各种编码和解题网站</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="就是为了玩的编码"><a href="#就是为了玩的编码" class="headerlink" title="就是为了玩的编码"></a>就是为了玩的编码</h1><p>一般来说<code>==</code>结尾的是中文，<code>=</code>结尾的是英文或数字</p>
+<h2 id="箭头"><a href="#箭头" class="headerlink" title="箭头"></a>箭头</h2><p>类似于这样的箭头<br><code>←↘←←←↗←↘←↖←→←↖←←←↗←↘←↖←↓←↔←↙←↔←↙←←←↓←→←←←↓←↓←↔←↗←↕←↔←↗←↗←↕←↑←→←→←→←↖←↖←↘←↔←↗←↗←→←↔←↖←↑←↓←↖←↙←↙←↖←↕←↑←↙←↙←↗←→←↑←↖←↖←↘←↔←↗=</code><br><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=jiantou">↔↻↑←↙←↓↑↙↕↳↘&#x3D;&#x3D;</a></p>
+<h2 id="花朵"><a href="#花朵" class="headerlink" title="花朵"></a>花朵</h2><p><code>✻❁✻❀✻❀✻✾✻❂=</code><br><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=huaduo">✿❊✼✻❄✻✾✼❄❀❈❃&#x3D;&#x3D;</a></p>
+<h2 id="emoji（base100）"><a href="#emoji（base100）" class="headerlink" title="emoji（base100）"></a>emoji（base100）</h2><p>一定要认出来，可能是一堆动物，一堆交通标志，也可能是黑白的  </p>
+<p>这个例子在做题的时候用txt打开就是黑白的  </p>
+<p>（这三个是一道题出来的，一个简单的RSA,按文章顺序分别是n，e，c） </p>
+<p><code>🐭🐬🐩🐬🐧🐮🐨🐰🐨🐪🐨🐭🐰🐰🐰🐧🐫🐮🐫🐮🐯🐬🐮🐬🐮🐨🐮🐧🐪🐧🐫🐧🐪🐬🐭🐨🐬🐫🐨🐨🐯🐩🐯🐯🐮🐭🐧🐬🐩🐯🐮🐰🐧🐮🐧🐩🐰🐮</code>  </p>
+<p><a target="_blank" rel="noopener" href="https://ctf.bugku.com/tool/base100">📛💳💗📠👷👸📠💎💟</a></p>
+<h2 id="音符"><a href="#音符" class="headerlink" title="音符"></a>音符</h2><p><code>♩∮¶♯♬♭♫§♬♩♩¶¶∮♯=</code>  </p>
+<p><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=yinyue">♯‖♯∮‖§♩¶♭§§♬§♩‖♪&#x3D;&#x3D;</a></p>
+<h2 id="嗷呜"><a href="#嗷呜" class="headerlink" title="嗷呜~"></a>嗷呜~</h2><p>  嗷呜嗷呜嗷呜~</p>
+<p>  其实和与佛论禅一样，也是平平无奇的AES</p>
+<p>  <a target="_blank" rel="noopener" href="https://www.shouyinyizhe.com/">嗷呜~</a></p>
+<h2 id="aa编码"><a href="#aa编码" class="headerlink" title="aa编码"></a>aa编码</h2><p>可爱的日式表情<code>^_^</code>  ，其实是js编码  </p>
+<p>在线编码：<a target="_blank" rel="noopener" href="https://utf-8.jp/public/aaencode.html">utf-8.jp</a>  </p>
+<p>在线解码：<a target="_blank" rel="noopener" href="https://www.qtool.net/decode">qtool</a></p>
+<h2 id="9键密码"><a href="#9键密码" class="headerlink" title="9键密码"></a>9键密码</h2><p>  26键党表示一脸懵逼，害</p>
+<p>  本来最开始的9键密码还能看出来，比如<code>L</code>就是<code>53</code>，数字5第三个嘛  </p>
+<p>  这时候问题来了，我竟然见到了<code>555</code>表示<code>L</code>，数字5摁三下？9键也没这么输入英语的啊</p>
+<h1 id="base家族"><a href="#base家族" class="headerlink" title="base家族"></a>base家族</h1><p>base编码老熟人了，打CTF怎么可能没见过base？关键是怎么一眼分别出是哪种base。看结尾的<code>=</code>？编码结尾可以有<code>=</code>，也可以没有啊</p>
+<h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><p>base64可以包括<code>A-Z</code> <code>a-z</code> <code>0-9</code> <code>+</code> <code>/</code>。结尾最多有2个<code>=</code>  </p>
+<p><a target="_blank" rel="noopener" href="http://ctf.ssleye.com/base64.html">base64</a>（16、32、64合在一起的，记得选64）</p>
+<h2 id="base32"><a href="#base32" class="headerlink" title="base32"></a>base32</h2><p>可以包括<code>A-Z</code> <code>2-7</code>，结尾最多有6个<code>=</code>  </p>
+<p><a target="_blank" rel="noopener" href="http://ctf.ssleye.com/base64.html">base32</a>（还是上面那个，选32）</p>
+<h2 id="base16"><a href="#base16" class="headerlink" title="base16"></a>base16</h2><p>可以包括<code>0-9</code> <code>A-F</code>结尾没有<code>=</code>  </p>
+<p>（我竟然见过纯数字的base16，这谁想得到base啊）  </p>
+<p><a target="_blank" rel="noopener" href="http://ctf.ssleye.com/base64.html">base16</a>（又是这个网址）</p>
+<h2 id="base58"><a href="#base58" class="headerlink" title="base58"></a>base58</h2><p>bitcoin用的编码方式  </p>
+<p>包含<code>0-9</code>,<code>A-Z</code>,<code>a-z</code>中除了<code>O</code>,<code>0</code>,<code>I</code>,<code>i</code>,<code>+</code>,<code>/</code>，没有<code>=</code>  </p>
+<p>64-6&#x3D;58,数学满分！</p>
+<p><a target="_blank" rel="noopener" href="http://ctf.ssleye.com/base58w.html">base58</a>  </p>
+<p>记得改模式，打ctf的时候用的基本是str模式</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Misc/" rel="tag"># Misc</a>
+              <a href="/tags/Crypto/" rel="tag"># Crypto</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/19/2020-12-19-VSCode/" rel="prev" title="VS Code on MacBook">
+                  <i class="fa fa-chevron-left"></i> VS Code on MacBook
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/26/2020-12-26-RSA/" rel="next" title="RSA">
+                  RSA <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

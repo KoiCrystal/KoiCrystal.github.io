@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="被RSA搞得神志不清的小菜鸡。“这要是能解那我岂不是把RSA给破解了？”小菜鸡的内心OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA">
+<meta property="og:url" content="http://example.com/2020/12/26/2020-12-26-RSA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="被RSA搞得神志不清的小菜鸡。“这要是能解那我岂不是把RSA给破解了？”小菜鸡的内心OS">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.826Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/12/26/2020-12-26-RSA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/12/26/2020-12-26-RSA/","path":"2020/12/26/2020-12-26-RSA/","title":"RSA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>RSA | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5c%EF%BC%8Ce%EF%BC%8Cn%EF%BC%8C%E6%B1%82m"><span class="nav-number">1.</span> <span class="nav-text">已知c，e，n，求m</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8D%E8%83%BD%E5%A5%BD%E5%A5%BD%E7%BB%99n-p-q%E7%B3%BB%E5%88%97"><span class="nav-number">2.</span> <span class="nav-text">不能好好给n , p , q系列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5c-e%E5%92%8Cn%E7%9A%84%E5%9B%A0%E5%AD%90%EF%BC%8C%E6%B1%82m"><span class="nav-number">2.1.</span> <span class="nav-text">已知c , e和n的因子，求m</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%A5%BD%E5%A5%BD%E7%BB%99p-q%E4%BD%86%E6%98%AF%E7%BB%99%E4%BA%86tip-x3D-2-x-y-beta-x-y"><span class="nav-number">2.2.</span> <span class="nav-text">不好好给p,q但是给了tip &#x3D; 2 * x * y * beta + x + y</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5c%E3%80%81e%E3%80%81d%E5%92%8Cp%E3%80%81q%E4%BD%8D%E6%95%B0%EF%BC%8C%E4%B8%94p%E3%80%81q%E7%9B%B8%E9%82%BB%EF%BC%8C%E6%B1%82m"><span class="nav-number">2.3.</span> <span class="nav-text">已知c、e、d和p、q位数，且p、q相邻，求m</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5n%E3%80%81c%E3%80%81e%E3%80%81lcm-p-1-q-1-%E6%B1%82m-%E8%BF%99%E9%87%8C%E6%9C%89%E5%88%A4%E6%96%AD%E7%B4%A0%E6%95%B0%E8%84%9A%E6%9C%AC"><span class="nav-number">2.4.</span> <span class="nav-text">已知n、c、e、lcm(p-1,q-1)求m.这里有判断素数脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5m%E3%80%81c%E3%80%81n%EF%BC%8C%E6%B1%82e"><span class="nav-number">3.</span> <span class="nav-text">已知m、c、n，求e</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/26/2020-12-26-RSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RSA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-26 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-26T00:00:00+08:00">2020-12-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">被RSA搞得神志不清的小菜鸡。“这要是能解那我岂不是把RSA给破解了？”小菜鸡的内心OS</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="已知c，e，n，求m"><a href="#已知c，e，n，求m" class="headerlink" title="已知c，e，n，求m"></a>已知c，e，n，求m</h1><p>一般是签到题，<a target="_blank" rel="noopener" href="https://hideonblack.github.io/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/2020/12/24/%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/">奇奇怪怪的编码</a>里的前三个数据就是这个题的n，e，c<br>n如果不太大，可以用<a target="_blank" rel="noopener" href="http://www.factordb.com/">factordb</a>在线分解，分解不了用yafu。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># ················设置数据</span></span><br><span class="line">n=</span><br><span class="line">p=</span><br><span class="line">q=</span><br><span class="line">c=</span><br><span class="line">e=</span><br><span class="line"><span class="comment">#··················结束</span></span><br><span class="line">phi_n=(p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d=gmpy2.invert(e,phi_n)</span><br><span class="line">m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h1 id="不能好好给n-p-q系列"><a href="#不能好好给n-p-q系列" class="headerlink" title="不能好好给n , p , q系列"></a>不能好好给n , p , q系列</h1><p>这一部分就基本上是为了CTF而CTF了，实际应用中巴不得把p,q都销毁了。</p>
+<h2 id="已知c-e和n的因子，求m"><a href="#已知c-e和n的因子，求m" class="headerlink" title="已知c , e和n的因子，求m"></a>已知c , e和n的因子，求m</h2><p>这个题就很委婉了，简直是欲迎还拒，加密的关键代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p,q,r=[getPrime(nbit) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]:</span><br><span class="line"><span class="keyword">if</span> isPrime(p+q+r):</span><br><span class="line">	n=(p+q+r)*p*q*r</span><br><span class="line">c=<span class="built_in">pow</span>(flag,e,n)</span><br></pre></td></tr></table></figure>
+<p>乍一看尝试用各种方式去分解n，根本分解不出来。感慨一下信安数学基础真的是白学了<br>c&#x3D;m ^ e(mod (p+q+r) * p * q * r)<br>那不就是满足方程组：<br>c&#x3D;m ^ e(mod (p+q+r))<br>c&#x3D;m ^ e(mod p)<br>c&#x3D;m ^ e(mod q)<br>c&#x3D;m ^ e(mod r)<br>都知道p+q+r了，直接回归签到题难度</p>
+<h2 id="不好好给p-q但是给了tip-x3D-2-x-y-beta-x-y"><a href="#不好好给p-q但是给了tip-x3D-2-x-y-beta-x-y" class="headerlink" title="不好好给p,q但是给了tip &#x3D; 2 * x * y * beta + x + y"></a>不好好给p,q但是给了tip &#x3D; 2 * x * y * beta + x + y</h2><p>题目代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># tip： 2 * x * y * beta + x + y</span></span><br><span class="line"><span class="keyword">if</span> is_prime(beta) <span class="keyword">and</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(beta)[<span class="number">2</span>:]) == <span class="number">512</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">bin</span>(x)[<span class="number">2</span>:]) == <span class="built_in">len</span>(<span class="built_in">bin</span>(y)[<span class="number">2</span>:]) :</span><br><span class="line">        p = <span class="number">2</span> * x * beta + <span class="number">1</span></span><br><span class="line">        q = <span class="number">2</span> * y * beta + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> is_prime(p) <span class="keyword">and</span> is_prime(q):</span><br><span class="line">            n = p * q</span><br><span class="line">            e = <span class="number">65537</span></span><br><span class="line">            m = bytes_to_long(flag.encode())</span><br><span class="line">            enc = powmod(m, e, n)</span><br><span class="line">            <span class="built_in">print</span>(n)</span><br><span class="line">            <span class="built_in">print</span>(e)</span><br><span class="line">            <span class="built_in">print</span>(beta)</span><br><span class="line">            <span class="built_in">print</span>(enc)</span><br></pre></td></tr></table></figure>
+<p>  我们可以看出<code>tip=(n - 1)//(2 * beta)</code>  </p>
+<p>  满足关系<code>(x+y)(mod beta)=tip (mod beta)</code>,我们将结果命名为<code>x_add_y</code>，<code>x_add_y</code>循环加<code>beta</code>，在不太大的范围内能得到<code>x+y</code> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n =</span><br><span class="line">e = </span><br><span class="line">enc =</span><br><span class="line">beta =</span><br><span class="line">tip = (n-<span class="number">1</span>)//(<span class="number">2</span>*beta)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">    x_add_y = tip % beta + beta*i</span><br><span class="line">    x_mul_y = (tip - x_add_y)//(<span class="number">2</span>*beta)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> gmpy2.iroot(x_add_y**<span class="number">2</span> - <span class="number">4</span>*x_mul_y,<span class="number">2</span>)[<span class="number">1</span>]:   <span class="comment">#第一位返回结果，第二位返回结果是否精确的布尔值</span></span><br><span class="line">            <span class="comment">#解方程获取x 和 y</span></span><br><span class="line">            y = (x_add_y - gmpy2.iroot(x_add_y**<span class="number">2</span> - <span class="number">4</span>*x_mul_y,<span class="number">2</span>)[<span class="number">0</span>])//<span class="number">2</span></span><br><span class="line">            x = x_add_y - y</span><br><span class="line">            p = <span class="number">2</span>*y*beta + <span class="number">1</span></span><br><span class="line">            q = <span class="number">2</span>*x*beta + <span class="number">1</span></span><br><span class="line">            phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">            d = inverse(e,<span class="built_in">int</span>(phi))</span><br><span class="line">            <span class="built_in">print</span> (long_to_bytes(<span class="built_in">pow</span>(enc,d,n)))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="已知c、e、d和p、q位数，且p、q相邻，求m"><a href="#已知c、e、d和p、q位数，且p、q相邻，求m" class="headerlink" title="已知c、e、d和p、q位数，且p、q相邻，求m"></a>已知c、e、d和p、q位数，且p、q相邻，求m</h2><p>有公式：ed - 1 &#x3D; k(p - 1)(q - 1)<br>我们可以求出ed的二进制位数和(p - 1)(q - 1)的二进制位数，并求得两者差值为len_k<br>所以可以在一个不太大的范围内循环k爆破phi，min_k&#x3D;2^(len_k-1)，max_k&#x3D;2^(len_k)<br>又因为p,q为相邻的素数，所以phi开方前后两个素数就是p,q了<br>（突然想到，但是如果运气不好，q是x位素数中最大的一个，那q就要进位了，那么 k * (p - 1) * (q - 1) （简写为len_kpq）就不再是2x了，而是2x+1。但是我们运气也不至于这么差吧，真是的话立马去买这个号码的彩票）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binlen</span>(<span class="params">s</span>):</span></span><br><span class="line">    s=<span class="built_in">bin</span>(s)[<span class="number">2</span>:]</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(s)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment">#·······················写数据</span></span><br><span class="line">    e=</span><br><span class="line">    d=</span><br><span class="line">    c=</span><br><span class="line">    len_kpq=</span><br><span class="line">    <span class="comment">#·······················结束</span></span><br><span class="line">    len_de=binlen(d*e-<span class="number">1</span>)</span><br><span class="line">    len_k=len_de-len_kpq</span><br><span class="line">    max_k=<span class="number">2</span>**len_k</span><br><span class="line">    min_k=<span class="number">2</span>**(len_k-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (min_k,max_k):</span><br><span class="line">        <span class="keyword">if</span> ((e*d-<span class="number">1</span>)%i==<span class="number">0</span>):</span><br><span class="line">            p=sympy.prevprime(gmpy2.iroot((e*d-<span class="number">1</span>)//i,<span class="number">2</span>)[<span class="number">0</span>])</span><br><span class="line">            <span class="comment">#gmpy2.iroot用于开方，返回的是(mpz(5),False),所以用[0]取前面的数字</span></span><br><span class="line">            q=sympy.nextprime(p)</span><br><span class="line">            <span class="keyword">if</span>((e*d-<span class="number">1</span>)//i==(p-<span class="number">1</span>)*(q-<span class="number">1</span>)):</span><br><span class="line">                n=p*q</span><br><span class="line">                m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line">                <span class="built_in">print</span>(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h2 id="已知n、c、e、lcm-p-1-q-1-求m-这里有判断素数脚本"><a href="#已知n、c、e、lcm-p-1-q-1-求m-这里有判断素数脚本" class="headerlink" title="已知n、c、e、lcm(p-1,q-1)求m.这里有判断素数脚本"></a>已知n、c、e、lcm(p-1,q-1)求m.这里有判断素数脚本</h2><p>lcm(p-1,q-1)在题目中被命名为<code>gift</code>，lcm()的人话叫最小公倍数<br>而phi&#x3D;(p-1) * (q-1)，这意味着phi一定是gift的倍数。所以我们直接循环这个倍数来爆破了<br>但是这个题还有个坑，e不是素数，e&#x2F;2才是。所以公式要改为<code>c = (m^2) ^ (e/2) mod d</code>，我们用e&#x2F;2求出m^2后要开方求出m<br>先写一个判断e除以几(prime_e)才是素数的脚本，也可以用来判断是不是素数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">e=        			<span class="comment">#·············数据</span></span><br><span class="line">prime_e=<span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> (e%prime_e==<span class="number">0</span>):</span><br><span class="line">        ep=gmpy2.mpz(e/prime_e)</span><br><span class="line">        <span class="keyword">if</span>(gmpy2.is_prime(ep)):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    prime_e+=<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(prime_e)</span><br></pre></td></tr></table></figure>
+<p>解题脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sympy</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#···························设置数据</span></span><br><span class="line">n=</span><br><span class="line">c=</span><br><span class="line">e=</span><br><span class="line">gift=</span><br><span class="line">prime_e=</span><br><span class="line"><span class="comment">#···························完成</span></span><br><span class="line">e=e/prime_e</span><br><span class="line">max_x=n//gift</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">1</span>,max_x+<span class="number">1</span>):</span><br><span class="line">    phi=i*gift</span><br><span class="line">    e=gmpy2.mpz(e)</span><br><span class="line">    phi=gmpy2.mpz(phi)</span><br><span class="line">    <span class="keyword">if</span> (GCD(phi,e)==<span class="number">1</span>):   <span class="comment">#gcd:最大公约数</span></span><br><span class="line">        d=gmpy2.invert(e,phi)</span><br><span class="line">        m=<span class="built_in">pow</span>(c,d,n)</span><br><span class="line">        flag=<span class="built_in">str</span>(long_to_bytes(gmpy2.iroot(m,prime_e)[<span class="number">0</span>]))</span><br><span class="line">        <span class="built_in">print</span>(flag)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h1 id="已知m、c、n，求e"><a href="#已知m、c、n，求e" class="headerlink" title="已知m、c、n，求e"></a>已知m、c、n，求e</h1><p>题目给出了加密思路。把flag当密钥e，把明文加密为密文，并且给出了n。<br>关键代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">e=libnum.s2n(flag)</span><br><span class="line">n = <span class="number">2</span> ** <span class="number">514</span></span><br><span class="line">m = random.randint(<span class="number">2</span>, n-<span class="number">1</span>) | <span class="number">1</span></span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line">另一个文件给出了m、c的值</span><br></pre></td></tr></table></figure>
+<p>拿到题我人傻了，这除了爆破莫得办法啊<br>你别说，还真就是爆破。只不过是有效率的爆破，用的是大步小步法（Baby-step Giant-step）<br>直接用<code>sympy</code>轮子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sympy.ntheory <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># ················设置数据</span></span><br><span class="line">n =</span><br><span class="line">m =</span><br><span class="line">c =</span><br><span class="line"><span class="comment"># ················设置数据</span></span><br><span class="line">flag = discrete_log(n,c,m)</span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(flag))</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Crypto/" rel="tag"># Crypto</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/24/2020-12-24-%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E7%BC%96%E7%A0%81/" rel="prev" title="奇奇怪怪的密码">
+                  <i class="fa fa-chevron-left"></i> 奇奇怪怪的密码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/07/2021-01-07-%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E7%9A%84%E7%BB%95%E8%BF%87/" rel="next" title="杂七杂八的绕过">
+                  杂七杂八的绕过 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

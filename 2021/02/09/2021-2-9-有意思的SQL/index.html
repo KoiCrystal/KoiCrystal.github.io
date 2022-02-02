@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="SQL的绕过姿势and各种各样的SQL脑洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有意思的SQL">
+<meta property="og:url" content="http://example.com/2021/02/09/2021-2-9-%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84SQL/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SQL的绕过姿势and各种各样的SQL脑洞">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.828Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/02/09/2021-2-9-%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84SQL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/02/09/2021-2-9-%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84SQL/","path":"2021/02/09/2021-2-9-有意思的SQL/","title":"有意思的SQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>有意思的SQL | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%A7%BF%E5%8A%BF%E8%A6%81%E5%A6%96%E5%A8%86"><span class="nav-number">1.</span> <span class="nav-text">绕过姿势要妖娆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">绕过空格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E7%AD%89%E5%8F%B7"><span class="nav-number">1.2.</span> <span class="nav-text">绕过等号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95"><span class="nav-number">1.3.</span> <span class="nav-text">黑名单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E8%B5%9B%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">有意思的赛题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E9%95%BF%E5%BA%A6%E6%88%AA%E6%96%AD%E5%92%8Cmysql-real-escape-string%EF%BC%8Cflag%E5%9C%A8%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E5%BA%93%E9%87%8C"><span class="nav-number">2.1.</span> <span class="nav-text">利用长度截断和mysql_real_escape_string，flag在另外一个库里</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/09/2021-2-9-%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          有意思的SQL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-09T00:00:00+08:00">2021-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">SQL的绕过姿势and各种各样的SQL脑洞</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="绕过姿势要妖娆"><a href="#绕过姿势要妖娆" class="headerlink" title="绕过姿势要妖娆"></a>绕过姿势要妖娆</h1><h2 id="绕过空格"><a href="#绕过空格" class="headerlink" title="绕过空格"></a>绕过空格</h2><p><code>/**/</code>占位置的正则表达<br><code>%09</code>tab<br><code>%20</code>空格  </p>
+<h2 id="绕过等号"><a href="#绕过等号" class="headerlink" title="绕过等号"></a>绕过等号</h2><p><code>regexp</code><br><code>like</code><br><code>rlike</code><br>都可以代替等号</p>
+<h2 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h2><p>如果是用空字符代替关键字，可以复写关键字，例如用</p>
+<h1 id="有意思的赛题"><a href="#有意思的赛题" class="headerlink" title="有意思的赛题"></a>有意思的赛题</h1><h2 id="利用长度截断和mysql-real-escape-string，flag在另外一个库里"><a href="#利用长度截断和mysql-real-escape-string，flag在另外一个库里" class="headerlink" title="利用长度截断和mysql_real_escape_string，flag在另外一个库里"></a>利用长度截断和mysql_real_escape_string，flag在另外一个库里</h2><p>  这道题回过头来看是道好题，但是出题真的，猜的部分太多了，耐心有限啊</p>
+<p>  打开网站是注册页面，那就先注册试试  </p>
+<p>  输入<code>name=123</code>，回显<code>hello, 123</code>，好像很正常，但是我们尝试闭合引号，输入<code>name=123&#39;</code>,回显<code>hello, 123\&#39;</code>  </p>
+<p>  这就<del>很明显</del>是<code>mysql_real_escape_string</code>函数了，在特殊字符前加<code>\</code>进行转义  </p>
+<p>  页面自动跳转到登录界面，我们用用刚刚注册的账号登录，发现会回显password，找到了注入点  </p>
+<p>  那么问题来了，我们知道注入点，该怎么利用呢？重点就是该怎么闭合引号使注入点代码执行  </p>
+<p>  之后我们再尝试发现，对长度有要求，大于30个字符会进行截断  </p>
+<p>  这里就是纯靠运气了，我赌你的验证代码就是一句话（可以，这很cumtctf）<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> &quot;select * from user where username = &#x27;$name&#x27; and password=&#x27;$passowrd&#x27;&quot;;</span><br></pre></td></tr></table></figure><br>  我们利用30位截取这个限制，输入<code>01234567890123456789012345678</code>  </p>
+<p>  经过转义和截断，回显<code>hello, 01234567890123456789012345678\</code>  </p>
+<p>  最后这个<code>\</code>是转义<code>&#39;</code>时产生的。所以我们在登录时，username输入</p>
+<pre><code>username=01234567890123456789012345678\
+password=union select 1,2,3#
+</code></pre>
+<p>  查询语句就成了<code>select * from user where username=&#39;01234567890123456789012345678\&#39; and password=&#39; union select 1,2,3#</code>  </p>
+<p>  最后的<code>\</code>转义掉了查询语句的<code>&#39;</code>，查询到username实际上是<code>01234567890123456789012345678\&#39; and password=</code></p>
+<p>  回显<code>hello,your password is 3</code>，因此在位置3进行注入  </p>
+<p>  根据提示表名是flag，而且注入ban了<code>&#39;</code>,猜测字段名也是flag(手动问号脸？？？？？)  </p>
+<p>  但是直接<code>union select 1,2,(select flag from flag)#</code>，回显了<code>This_is_not_flag</code>，竟然不是，emmmm</p>
+<p>  其实是因为想当然的跳过了查库名这一步，以为flag就在当前库里，其实还有一个叫<code>This_true</code>的库，里面也有一个叫flag的表  </p>
+<p>  但是，怎么才能查询另一个库的东西呢？我知道了学长挖的坑，却不知道怎么跳出来，害！</p>
+<p>  看了别人的wp，是我太菜<code>union select 1,2,(select flag from This_true.flag)#</code>
+  </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/04/2021-2-4-LFSR/" rel="prev" title="LFSR">
+                  <i class="fa fa-chevron-left"></i> LFSR
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/02/2021-4-2-easy_xor/" rel="next" title="easy_xor">
+                  easy_xor <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

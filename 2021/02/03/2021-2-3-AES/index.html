@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="终于还是对AES下手了，这不是我们现行的商用密码吗？嘿嘿嘿！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AES">
+<meta property="og:url" content="http://example.com/2021/02/03/2021-2-3-AES/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="终于还是对AES下手了，这不是我们现行的商用密码吗？嘿嘿嘿！">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.827Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/02/03/2021-2-3-AES/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/02/03/2021-2-3-AES/","path":"2021/02/03/2021-2-3-AES/","title":"AES"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AES | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5%E6%98%8E%E6%96%87%E5%AF%86%E6%96%87%E6%B1%82iv"><span class="nav-number">1.</span> <span class="nav-text">已知明文密文求iv</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/03/2021-2-3-AES/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AES
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-02-03T00:00:00+08:00">2021-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">终于还是对AES下手了，这不是我们现行的商用密码吗？嘿嘿嘿！</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="已知明文密文求iv"><a href="#已知明文密文求iv" class="headerlink" title="已知明文密文求iv"></a>已知明文密文求iv</h1><p>这道题给了明文和对应的密文，求iv<br>再用iv求出另一个密文对应的明文即为flag<br>不得不吐槽一下python，python3里把str和bytes分开了，比赛时被搞得头昏脑胀，又一次死在了python版本上<br>复现时自己写了脚本，大量时间花在了转码上，害<br>先说一下求iv的基本思路：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、伪造一个fakeIV  </span><br><span class="line">2、使用fakeIV解密密文cipherText，得到假明文fakePlainText  </span><br><span class="line">3、把密文cipherText和fakeIV 作异或运算，得到enc_msg  </span><br><span class="line">4、把enc_msg和明文plainText作异或运算就能得到真正的 IV  </span><br></pre></td></tr></table></figure>
+<p>回到这道题本身，给了两个加密过的文件，打开都是乱码，所以我们用十六进制打开，然后解码（python3解码16进制字符串真麻烦）<br>加解密是不支持str格式的，只能用bytes。十六进制解码之后已经是bytes了，其他的要用<code>encode(&#39;utf8&#39;)</code>来解决</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dehex</span>(<span class="params">s</span>):</span>       <span class="comment"># return bytes</span></span><br><span class="line">    s=binascii.a2b_hex(s)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xor</span>(<span class="params">p1,p2</span>):</span>            <span class="comment"># return bytes</span></span><br><span class="line">    tmp=<span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(p2)):</span><br><span class="line">        tmp+=<span class="built_in">chr</span>(p1[i]^p2[i])         <span class="comment"># p[i] is int</span></span><br><span class="line">    <span class="keyword">return</span> tmp.encode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">	</span><br><span class="line"><span class="comment">#设置数据，类型为str</span></span><br><span class="line">plainText = <span class="string">&quot;Can_You_Find_me?&quot;</span></span><br><span class="line">cipherText1=<span class="string">&quot;97FB685D28FC895BB1617CDA1E6C4D76&quot;</span></span><br><span class="line">cipherText=<span class="string">&quot;D0EC67CCCF6B2BB057C4FAA168FA670C12CBB3D5D058968FF60426F95344A84B&quot;</span></span><br><span class="line">key = <span class="string">&#x27;19e6855d293a1b76ff44f18948b19bad&#x27;</span></span><br><span class="line">fakeIV=<span class="string">&quot;aaaaaaaaaaaaaaaa&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#解码，十六进制解码、utf8解码，结果为bytes</span></span><br><span class="line">key=dehex(key)</span><br><span class="line">cipherText1=dehex(cipherText1)</span><br><span class="line">cipherText=dehex(cipherText)</span><br><span class="line">plainText=plainText.encode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">fakeIV=fakeIV.encode(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#求iv</span></span><br><span class="line">fakeIVAes=AES.new(key,AES.MODE_CBC,fakeIV)</span><br><span class="line">fakePlainText=fakeIVAes.decrypt(cipherText1)</span><br><span class="line">enc_msg=xor(fakePlainText,fakeIV)</span><br><span class="line">iv=xor(enc_msg,plainText)</span><br><span class="line"></span><br><span class="line"><span class="comment">#求flag</span></span><br><span class="line">aes=AES.new(key,AES.MODE_CBC,iv)</span><br><span class="line">flag=aes.decrypt(cipherText)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<p>对于这道题，求iv还有另一个思路。<br>因为在CBC模式下，16个字节为一组，而题目的明密文长度也是16，即只进行了一轮加密<br>所以直接用ECB模式解密，再和明文异或即可得到iv</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aes=AES.new(key,AES.MODE_ECB)</span><br><span class="line">enc=aes.decrypt(cipherText1)</span><br><span class="line">iv=xor(plainText,enc)</span><br><span class="line"><span class="built_in">print</span>(iv)</span><br></pre></td></tr></table></figure>
+<p>还有一点就是如果觉得用16进制打开加密文件麻烦的话，可以直接用rb模式打开文件，以二进制读取文件，而且直接就是bytes类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;cipherText1&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cipherText1=f.read()</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Crypto/" rel="tag"># Crypto</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/25/2021-1-25-Misc/" rel="prev" title="Misc">
+                  <i class="fa fa-chevron-left"></i> Misc
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/04/2021-2-4-LFSR/" rel="next" title="LFSR">
+                  LFSR <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

