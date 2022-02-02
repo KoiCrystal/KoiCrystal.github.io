@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="CTF的乐趣在于什么？flag❌ 配置工具✔️">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MacBook安全工具配置">
@@ -225,13 +225,18 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h1><h1 id="wfuzz"><a href="#wfuzz" class="headerlink" title="wfuzz"></a>wfuzz</h1><p>首先一定要注意python版本。wfuzz需要用到pycurl库，pycurl支持python3.5-3.8<br>版本高了可以用<code>brew unlink python3</code>移除现有版本，之后去官网下载适合的版本<br>直接<code>pip3 install wfuzz</code>和<code>pip3 install pycurl</code>会一直报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fatal exception: Wfuzz needs pycurl to run. Pycurl could be installed using the following command:</span><br><span class="line">pip install pycurl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">Fatal exception: Wfuzz needs pycurl to run. Pycurl could be installed using the following command:
+pip install pycurl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>明明安了pycurl但是wfuzz找不到<br>打开python检查一下pycurl</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3</span><br><span class="line">import pycurl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">python3
+import pycurl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>发现报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pycurl: libcurl link-time ssl backend (openssl) is different from compile-time ssl backend (none/other)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">pycurl: libcurl link-time ssl backend (openssl) is different from compile-time ssl backend (none&#x2F;other)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>以下是正确的安装姿势：<br>其实官网已经说的很明白了，习惯性不看而已<br><a target="_blank" rel="noopener" href="https://wfuzz.readthedocs.io/en/latest/user/installation.html#pycurl-on-macos">wfuzz官网</a><br>（官网方法注意第五步要用pip3而非pip）<br>如果已经安了pycurl先用<code>pip3 install pycurl</code>卸载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ brew install openssl</span><br><span class="line">$ brew install curl-openssl</span><br><span class="line">$ echo &#x27;export PATH=&quot;/usr/local/opt/curl-openssl/bin:$PATH&quot;&#x27; &gt;&gt; ~/.bash_profile</span><br><span class="line">$ PYCURL_SSL_LIBRARY=openssl LDFLAGS=&quot;-L/usr/local/opt/openssl/lib&quot; CPPFLAGS=&quot;-I/usr/local/opt/openssl/include&quot; pip3 install --no-cache-dir pycurl</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">$ brew install openssl
+$ brew install curl-openssl
+$ echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;curl-openssl&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile
+$ PYCURL_SSL_LIBRARY&#x3D;openssl LDFLAGS&#x3D;&quot;-L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;openssl&#x2F;lib&quot; CPPFLAGS&#x3D;&quot;-I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;openssl&#x2F;include&quot; pip3 install --no-cache-dir pycurl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>使用的时候总是提示找不到字典，说好的自带呢？难道是kali自带？被迫去GitHub下了一个worldlist<br>而且用的时候必须用绝对路径，相对路径找不到:sob:  :sob: :sob:<br>原目录太长了，所以把wordlist放到了<code>/Users/Shared</code>目录下</p>
 
     </div>
