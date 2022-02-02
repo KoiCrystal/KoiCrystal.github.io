@@ -54,5 +54,17 @@ deploy:
 `hexo generate`或简写为`hexo g`
 `hexo deploy`或简写为`hexo d`
 
+# 配色
+又是经典的配色问题，首先是行内代码块高亮改为淡黄色，在next8.9中，在`themes\next\source\css\_common\scaffolding\highlight\index.styl`中找到`code-inline`并修改为
+```
+$code-inline {
+  background: #ffffc1;
+  color: var(--highlight-foreground);
+}
+```
+这时候发现代码块也变成了淡黄色，发现下面的`code-block`直接`@extend $code-inline`，好家伙，作者是真省事啊。  
+那我们就重新声明一下背景颜色，加入一句`background: white;`。（ps：声明颜色可以用十六进制，也可以用rgba，也可以直接写颜色）  
+大功告成！
+
 # 跨设备使用
 留个坑吧，换电脑的时候再说

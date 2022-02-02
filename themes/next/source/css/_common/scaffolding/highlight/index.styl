@@ -16,12 +16,13 @@ if (hexo-config('darkmode')) {
 
 // Placeholder: $code-inline $code-block
 $code-inline {
-  background: var(--highlight-background);
+  background: #ffffc1;
   color: var(--highlight-foreground);
 }
 
 $code-block {
   @extend $code-inline;
+  background: white;
   line-height: $line-height-code-block;
   margin: 0 auto 20px;
 }
