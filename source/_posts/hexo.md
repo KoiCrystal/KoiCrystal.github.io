@@ -46,7 +46,7 @@ deploy:
 这就是我换Hexo最大的理由了  
 切记切记，不要用7.x的那几个版本，那个因为原作者不在线而接手next的作者也不在线了，一个更新的作者接手了这个项目。我现在用的最新的8.9版本！  
 [NeXT](https://theme-next.js.org/)  
-根据官网说法，在根目录创建名为`_config.next.yml`的文件，并将`/themes/next/_config.yml`的内容复制过去。
+根据官网说法，在根目录创建名为`_config.next.yml`的文件，并将`/themes/next/_config.yml`的内容复制过去。之后要修改主题的配置也是在这里啦~
 虽然不知道要不要在`_config.yml`中修改为`theme: next`，但是改了总没错。
 
 # 发文章
