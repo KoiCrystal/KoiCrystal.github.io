@@ -224,265 +224,47 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="struck"><a href="#struck" class="headerlink" title="struck"></a>struck</h1><h2 id="最最基础的struck理论"><a href="#最最基础的struck理论" class="headerlink" title="最最基础的struck理论"></a>最最基础的struck理论</h2><p>  C++中<code>struck</code>和<code>class</code>非常相似。类成员默认是私有的，结构体默认是公开的。可以把struck看作是轻量级的类。  </p>
-<p>  声明的struck会和int、char等一样，成为一种数据类型。<br>  <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-using namespace std;
-struct student
-&#123;
-    int age&#x3D;18;
-    string name;
-&#125;;
-int main()
-&#123;
-	student s1;
-    cout&lt;&lt;s1.age&lt;&lt;endl;
-    s1.age&#x3D;17;
-	s1.name&#x3D;&quot;liliang&quot;;
-    cout&lt;&lt;s1.age&lt;&lt;&#39; &#39;&lt;&lt;s1.name&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>  在这个例子中，我们定义了一个student结构体，其属性有int类型的<code>age</code>和string类型的<code>name</code>，我们在主函数中创建了一个student类型的s1，他有属性年龄和名字。  </p>
+<p>  声明的struck会和int、char等一样，成为一种数据类型。<br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age=<span class="number">18</span>;</span><br><span class="line">    string name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	student s1;</span><br><span class="line">    cout&lt;&lt;s1.age&lt;&lt;endl;</span><br><span class="line">    s1.age=<span class="number">17</span>;</span><br><span class="line">	s1.name=<span class="string">&quot;liliang&quot;</span>;</span><br><span class="line">    cout&lt;&lt;s1.age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;s1.name&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>  在这个例子中，我们定义了一个student结构体，其属性有int类型的<code>age</code>和string类型的<code>name</code>，我们在主函数中创建了一个student类型的s1，他有属性年龄和名字。  </p>
 <p>  在结构体中我们定义了<code>age</code>为18，之后又在s1中重新定义了<code>age</code>为17，可以看到被重定义为17</p>
-<p>  输出结果为：<br>  <pre class="line-numbers language-none"><code class="language-none">18
-17 liliang<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></p>
+<p>  输出结果为：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">18</span><br><span class="line">17 liliang</span><br></pre></td></tr></table></figure></p>
 <h2 id="奇奇怪怪的变量（对象）"><a href="#奇奇怪怪的变量（对象）" class="headerlink" title="奇奇怪怪的变量（对象）"></a>奇奇怪怪的变量（对象）</h2><p>  上面说过，struck创建的是一个等同于int、char等的一个类型，所以具体的对象叫做变量。不过我还是想把它当成class里的对象。</p>
-<h3 id="跟在结构体后面的变量"><a href="#跟在结构体后面的变量" class="headerlink" title="跟在结构体后面的变量"></a>跟在结构体后面的变量</h3>  <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include &lt;typeinfo&gt;
-using namespace std;
-struct student
-&#123;
-    int age;
-    string name;
-&#125;s2;
-int main()
-&#123;
-    s2.age&#x3D;18;
-    s2.name&#x3D;&quot;zhangzhen&quot;;
-    cout&lt;&lt;s2.age&lt;&lt;&#39; &#39;&lt;&lt;s2.name&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="跟在结构体后面的变量"><a href="#跟在结构体后面的变量" class="headerlink" title="跟在结构体后面的变量"></a>跟在结构体后面的变量</h3>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;s2;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s2.age=<span class="number">18</span>;</span><br><span class="line">    s2.name=<span class="string">&quot;zhangzhen&quot;</span>;</span><br><span class="line">    cout&lt;&lt;s2.age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;s2.name&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  这里的s2就和上个例子中的s1是平等的，都是一个变量。程序输出结果为：</p>
-<pre class="line-numbers language-none"><code class="language-none">18 zhangzhen<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">18 zhangzhen</span><br></pre></td></tr></table></figure>
 <h3 id="指针变量"><a href="#指针变量" class="headerlink" title="指针变量"></a>指针变量</h3><p>用<code>struckname *s=new struckname</code>创建一个指针变量s。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include &lt;typeinfo&gt;
-using namespace std;
-struct student
-&#123;
-    int age;
-    string name;
-&#125;s2;
-int main()
-&#123;
-    s2.age&#x3D;18;
-    s2.name&#x3D;&quot;zhangzhen&quot;;
-    cout&lt;&lt;s2.age&lt;&lt;&#39; &#39;&lt;&lt;s2.name&lt;&lt;endl;
-    student *s3&#x3D;new student;
-    s3-&gt;age&#x3D;19;
-    (*s3).name&#x3D;&quot;duhaodong&quot;;
-    cout&lt;&lt;s3-&gt;age&lt;&lt;&#39; &#39;&lt;&lt;s3-&gt;name&lt;&lt;endl;
-    cout&lt;&lt;typeid(s2).name()&lt;&lt;endl;
-    cout&lt;&lt;typeid(s3).name()&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;s2;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    s2.age=<span class="number">18</span>;</span><br><span class="line">    s2.name=<span class="string">&quot;zhangzhen&quot;</span>;</span><br><span class="line">    cout&lt;&lt;s2.age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;s2.name&lt;&lt;endl;</span><br><span class="line">    student *s3=<span class="keyword">new</span> student;</span><br><span class="line">    s3-&gt;age=<span class="number">19</span>;</span><br><span class="line">    (*s3).name=<span class="string">&quot;duhaodong&quot;</span>;</span><br><span class="line">    cout&lt;&lt;s3-&gt;age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;s3-&gt;name&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="built_in"><span class="keyword">typeid</span></span>(s2).<span class="built_in">name</span>()&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="built_in"><span class="keyword">typeid</span></span>(s3).<span class="built_in">name</span>()&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们用<code>cout&lt;&lt;typeid().name()&lt;&lt;endl;</code>分别查看s2和s3的类型（注意头文件<code>#include &lt;typeinfo&gt;</code>)<br>输出结果如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">18 zhangzhen
-19 duhaodong
-7student
-P7student<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">18 zhangzhen</span><br><span class="line">19 duhaodong</span><br><span class="line">7student</span><br><span class="line">P7student</span><br></pre></td></tr></table></figure>
 <p>可以看出s2的类型是<code>student</code>（前面的7代表名字长度是7），而s3的类型是<code>Pstudent</code>，是一个指针。</p>
 <p>在本例种中，用了两种方式对s3属性进行操作，<code>s3-&gt;age</code>和<code>(*s3).name</code></p>
 <p>另外一种使用指针对象的方法是跟在struck大括号后面</p>
-<pre class="line-numbers language-none"><code class="language-none">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-struct student
-&#123;
-    int age;
-    string name;
-&#125;*s4;
-int main()
-&#123;
-    s4&#x3D;new student;
-    s4-&gt;age&#x3D;3;
-    s4-&gt;name&#x3D;&quot;baobao&quot;;
-    cout&lt;&lt;s4-&gt;age&lt;&lt;&#39; &#39;&lt;&lt;s4-&gt;name&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct student</span><br><span class="line">&#123;</span><br><span class="line">    int age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;*s4;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    s4=new student;</span><br><span class="line">    s4-&gt;age=3;</span><br><span class="line">    s4-&gt;name=&quot;baobao&quot;;</span><br><span class="line">    cout&lt;&lt;s4-&gt;age&lt;&lt;&#x27; &#x27;&lt;&lt;s4-&gt;name&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为</p>
-<pre class="line-numbers language-none"><code class="language-none">3 baobao<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 baobao</span><br></pre></td></tr></table></figure>
 <p>注意，这里的s4一定要用<code>s4=new student</code>初始化，初始化，初始化！不然没有分配内存  </p>
 <p>值得一提的是，用<code>s4=new student</code>初始化之后s4的类型依然是student类型的指针  </p>
 <p>我们可以验证一下</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-struct student
-&#123;
-    int age;
-    string name;
-&#125;*s4;
-int main()
-&#123;
-    cout&lt;&lt;s4&lt;&lt;endl;
-    s4&#x3D;new student;
-    cout&lt;&lt;s4&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;*s4;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;s4&lt;&lt;endl;</span><br><span class="line">    s4=<span class="keyword">new</span> student;</span><br><span class="line">    cout&lt;&lt;s4&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为</p>
-<pre class="line-numbers language-none"><code class="language-none">0
-0xdc1c00<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">0xdc1c00</span><br></pre></td></tr></table></figure>
 <p>而在二叉树的这个题中，使用了<code>*s4=NULL</code>的用法，其实和只用<code>*s4</code>是一样的</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-struct student
-&#123;
-    int age;
-    string name;
-&#125;*s4&#x3D;NULL;
-int main()
-&#123;
-    cout&lt;&lt;s4&lt;&lt;endl;
-    s4&#x3D;new student;
-    cout&lt;&lt;s4&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;*s4=<span class="literal">NULL</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;s4&lt;&lt;endl;</span><br><span class="line">    s4=<span class="keyword">new</span> student;</span><br><span class="line">    cout&lt;&lt;s4&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们看一下地址：</p>
-<pre class="line-numbers language-none"><code class="language-none">0
-0xd41c00<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">0xd41c00</span><br></pre></td></tr></table></figure>
 <p>可以发现在声明之前是没有地址的（后面的地址不一样是因为分配的不一样，每次运行都会重新分配）</p>
 <h2 id="嵌套的结构体"><a href="#嵌套的结构体" class="headerlink" title="嵌套的结构体"></a>嵌套的结构体</h2><p>这个例子中，一个是外嵌套的类型为<code>xiannu</code>的<code>mama</code>，一个是内嵌套的<code>baba</code>  </p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-struct xiannu
-&#123;
-    int age;
-    string name;
-&#125;;
-struct people
-&#123;
-    int age;
-    string name;
-    xiannu mama;
-    people *baba;
-&#125;;
-int main()
-&#123;
-    people p1;
-    p1.age&#x3D;3;
-    p1.name&#x3D;&quot;jingjing&quot;;
-
-    p1.mama.age&#x3D;26;
-    p1.mama.name&#x3D;&quot;heli&quot;;
-
-    p1.baba&#x3D;new people;
-    p1.baba-&gt;age&#x3D;29;
-    p1.baba-&gt;name&#x3D;&quot;haiyang&quot;;
-
-    cout&lt;&lt;p1.age&lt;&lt;&#39; &#39;&lt;&lt;p1.name&lt;&lt;endl;
-    cout&lt;&lt;p1.mama.age&lt;&lt;&#39; &#39;&lt;&lt;p1.mama.name&lt;&lt;endl;
-    cout&lt;&lt;p1.baba-&gt;age&lt;&lt;&#39; &#39;&lt;&lt;p1.baba-&gt;name&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">xiannu</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">people</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    string name;</span><br><span class="line">    xiannu mama;</span><br><span class="line">    people *baba;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    people p1;</span><br><span class="line">    p1.age=<span class="number">3</span>;</span><br><span class="line">    p1.name=<span class="string">&quot;jingjing&quot;</span>;</span><br><span class="line"></span><br><span class="line">    p1.mama.age=<span class="number">26</span>;</span><br><span class="line">    p1.mama.name=<span class="string">&quot;heli&quot;</span>;</span><br><span class="line"></span><br><span class="line">    p1.baba=<span class="keyword">new</span> people;</span><br><span class="line">    p1.baba-&gt;age=<span class="number">29</span>;</span><br><span class="line">    p1.baba-&gt;name=<span class="string">&quot;haiyang&quot;</span>;</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;p1.age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;p1.name&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;p1.mama.age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;p1.mama.name&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;p1.baba-&gt;age&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;p1.baba-&gt;name&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果为</p>
-<pre class="line-numbers language-none"><code class="language-none">3 jingjing
-26 heli
-29 haiyang<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3 jingjing</span><br><span class="line">26 heli</span><br><span class="line">29 haiyang</span><br></pre></td></tr></table></figure>
 <p>这里要注意声明<code>p1.baba=new people;</code>，我们可以输出一下地址看一下</p>
-<pre class="line-numbers language-none"><code class="language-none">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-struct people
-&#123;
-    int age;
-    string name;
-    people *baba;
-&#125;;
-int main()
-&#123;
-    people p1;
-    cout&lt;&lt;p1.baba&lt;&lt;endl;
-    p1.baba&#x3D;new people;
-    cout&lt;&lt;p1.baba&lt;&lt;&#39; &#39;&lt;&lt;sizeof(p1.baba)&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct people</span><br><span class="line">&#123;</span><br><span class="line">    int age;</span><br><span class="line">    string name;</span><br><span class="line">    people *baba;</span><br><span class="line">&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    people p1;</span><br><span class="line">    cout&lt;&lt;p1.baba&lt;&lt;endl;</span><br><span class="line">    p1.baba=new people;</span><br><span class="line">    cout&lt;&lt;p1.baba&lt;&lt;&#x27; &#x27;&lt;&lt;sizeof(p1.baba)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在VS Code中在声明之前是没有合法地址的（第二行输出了合法地址是8位）<br>在code block中虽然不声明也可以获得合法地址且可以顺利执行，但是执行结束后会有<code>Process returned -1073741819</code>的报错。</p>
-<pre class="line-numbers language-none"><code class="language-none">0x10
-0x881c00 8<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x10</span><br><span class="line">0x881c00 8</span><br></pre></td></tr></table></figure>
 <p>  因此我们涉及到自身嵌套的时候，尤其是多层嵌套（比如本例中的儿子和爸爸妈妈一直往上排祖宗，又比如多层的二叉树），我们可以定义一个递归的函数来执行初始化操作，在函数递归过程中实现多次声明。</p>
-<h1 id="指针的引用"><a href="#指针的引用" class="headerlink" title="指针的引用"></a>指针的引用</h1><p>  就像一般的引用一样，指针的引用改变是全局的，举个栗子<br>  <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-using namespace std;
-void no(int *pa,int *pb)
-&#123;
-    cout&lt;&lt;&quot;just *&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of b:&quot;&lt;&lt;pb&lt;&lt;endl;
-    pa&#x3D;pb;
-    cout&lt;&lt;&quot;a is : &quot;&lt;&lt;*pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;endl;
-&#125;
-void yes (int *&amp;pa,int *&amp;pb)
-&#123;
-    cout&lt;&lt;&quot;*&amp;&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of b:&quot;&lt;&lt;pb&lt;&lt;endl;
-    pa&#x3D;pb;
-    cout&lt;&lt;&quot;a is : &quot;&lt;&lt;*pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;endl;
-&#125;
-int main()
-&#123;
-    int a&#x3D;6,b&#x3D;7;
-    int *pa&#x3D;&amp;a,*pb&#x3D;&amp;b;
-
-    cout&lt;&lt;&quot;the address at beginning:&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of b:&quot;&lt;&lt;pb&lt;&lt;endl;
-    cout&lt;&lt;endl;
-
-    no(pa,pb);
-
-    cout&lt;&lt;&quot;after just use * is:&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;a is : &quot;&lt;&lt;*pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of b:&quot;&lt;&lt;pb&lt;&lt;endl;
-    cout&lt;&lt;endl;
-
-    yes(pa,pb);
-
-    cout&lt;&lt;&quot;after use *&amp; is:&quot;&lt;&lt;endl;
-    cout&lt;&lt;&quot;a is : &quot;&lt;&lt;*pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of a:&quot;&lt;&lt;pa&lt;&lt;endl;
-    cout&lt;&lt;&quot;address of b:&quot;&lt;&lt;pb&lt;&lt;endl;
-    cout&lt;&lt;endl;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br>  输出结果为：</p>
-<pre class="line-numbers language-none"><code class="language-none">the address at beginning:
-address of a:0x61fe1c
-address of b:0x61fe18
-
-just *
-address of a:0x61fe1c
-address of b:0x61fe18
-a is : 7
-address of a:0x61fe18
-
-after just use * is:
-a is : 6
-address of a:0x61fe1c
-address of b:0x61fe18
-
-*&amp;
-address of a:0x61fe1c
-address of b:0x61fe18
-a is : 7
-address of a:0x61fe18
-
-after use *&amp; is:
-a is : 7
-address of a:0x61fe18
-address of b:0x61fe18<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="指针的引用"><a href="#指针的引用" class="headerlink" title="指针的引用"></a>指针的引用</h1><p>  就像一般的引用一样，指针的引用改变是全局的，举个栗子<br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">no</span><span class="params">(<span class="keyword">int</span> *pa,<span class="keyword">int</span> *pb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;just *&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of b:&quot;</span>&lt;&lt;pb&lt;&lt;endl;</span><br><span class="line">    pa=pb;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;a is : &quot;</span>&lt;&lt;*pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">yes</span> <span class="params">(<span class="keyword">int</span> *&amp;pa,<span class="keyword">int</span> *&amp;pb)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;*&amp;&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of b:&quot;</span>&lt;&lt;pb&lt;&lt;endl;</span><br><span class="line">    pa=pb;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;a is : &quot;</span>&lt;&lt;*pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">6</span>,b=<span class="number">7</span>;</span><br><span class="line">    <span class="keyword">int</span> *pa=&amp;a,*pb=&amp;b;</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;the address at beginning:&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of b:&quot;</span>&lt;&lt;pb&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">no</span>(pa,pb);</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;after just use * is:&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;a is : &quot;</span>&lt;&lt;*pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of b:&quot;</span>&lt;&lt;pb&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">yes</span>(pa,pb);</span><br><span class="line"></span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;after use *&amp; is:&quot;</span>&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;a is : &quot;</span>&lt;&lt;*pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of a:&quot;</span>&lt;&lt;pa&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;address of b:&quot;</span>&lt;&lt;pb&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>  输出结果为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">the address at beginning:</span><br><span class="line">address of a:0x61fe1c</span><br><span class="line">address of b:0x61fe18</span><br><span class="line"></span><br><span class="line">just *</span><br><span class="line">address of a:0x61fe1c</span><br><span class="line">address of b:0x61fe18</span><br><span class="line">a is : 7</span><br><span class="line">address of a:0x61fe18</span><br><span class="line"></span><br><span class="line">after just use * is:</span><br><span class="line">a is : 6</span><br><span class="line">address of a:0x61fe1c</span><br><span class="line">address of b:0x61fe18</span><br><span class="line"></span><br><span class="line">*&amp;</span><br><span class="line">address of a:0x61fe1c</span><br><span class="line">address of b:0x61fe18</span><br><span class="line">a is : 7</span><br><span class="line">address of a:0x61fe18</span><br><span class="line"></span><br><span class="line">after use *&amp; is:</span><br><span class="line">a is : 7</span><br><span class="line">address of a:0x61fe18</span><br><span class="line">address of b:0x61fe18</span><br></pre></td></tr></table></figure>
 <p>我们可以看出，在函数中使用指针只能在函数内部改变其地址和值，而如果使用了指针的引用，就可以在全局改变其地址和值。</p>
-<h1 id="我们的主体其实是二叉树"><a href="#我们的主体其实是二叉树" class="headerlink" title="我们的主体其实是二叉树"></a>我们的主体其实是二叉树</h1><p>  已经没什么好说的了，精髓都在上面。<br>  代码放到了仓库里，注释基本已经写明白了，测试数据（代码最后也有）：<br>  <pre class="line-numbers language-none"><code class="language-none">ABC  DE G  F   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><br>  (注意最后的空格)<br>  输出前中后序<br>  <pre class="line-numbers language-none"><code class="language-none">A B C D E G F 
-C B E G D F A 
-C G E F D B A
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
+<h1 id="我们的主体其实是二叉树"><a href="#我们的主体其实是二叉树" class="headerlink" title="我们的主体其实是二叉树"></a>我们的主体其实是二叉树</h1><p>  已经没什么好说的了，精髓都在上面。<br>  代码放到了仓库里，注释基本已经写明白了，测试数据（代码最后也有）：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ABC  DE G  F   </span><br></pre></td></tr></table></figure><br>  (注意最后的空格)<br>  输出前中后序<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A B C D E G F </span><br><span class="line">C B E G D F A </span><br><span class="line">C G E F D B A</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 
     </div>
 

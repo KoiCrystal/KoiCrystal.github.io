@@ -230,9 +230,7 @@
 <h2 id="GitHub的仓库得有一个吧"><a href="#GitHub的仓库得有一个吧" class="headerlink" title="GitHub的仓库得有一个吧"></a>GitHub的仓库得有一个吧</h2><p>把下载下来的模板文件都放在自己的仓库里。曾经天真的以为这就好了，其实这时候的网站是没有模板的，巨丑无比<br>把<code>_config.yml</code>文件里的baseurl改为自己的主页地址，记得加<code>/</code>，比如这个网站的配置信息就是<code>baseurl: &quot;/hideonblack.github.io</code> </p>
 <h1 id="与bug斗，其乐无穷"><a href="#与bug斗，其乐无穷" class="headerlink" title="与bug斗，其乐无穷"></a>与bug斗，其乐无穷</h1><p>正常的操作应该是：cd进入刚刚的本地仓库，打开终端输入命令<br><code>gem install jekyll bundler</code><br><code>bundle exec jekyll serve</code><br>然后就可以根据<code> Server address:</code>里面的地址预览网页了。<br>当然，这是最理想的状态，没有bug那还叫程序吗？</p>
 <h2 id="nokogiri"><a href="#nokogiri" class="headerlink" title="nokogiri"></a>nokogiri</h2><p>精髓中的精髓，一定要好好吐槽一下<br>一直在提示<code>Make sure that `gem install nokogiri -v &#39;1.6.8.1&#39;` succeeds before bundling</code>，但是执行<code>gem install nokogiri -v &#39;1.6.8.1&#39;</code>却始终没问题<br>看别人的经验也安了<code>libxml2</code>和<code> libxslt</code>，最后有用没用也不知道<br>最后最后，大半夜凌晨三点，实在要放弃开始准备睡觉的时候，看到了藏在代码堆里的官方给的提示：</p>
-<pre class="line-numbers language-none"><code class="language-none">If you are using Bundler, tell it to use the option:  
-    bundle config build.nokogiri --use-system-libraries    
-    bundle install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">If you are using Bundler, tell it to use the option:  </span><br><span class="line">    bundle config build.nokogiri --use-system-libraries    </span><br><span class="line">    bundle install</span><br></pre></td></tr></table></figure>
 <p>啊这，你知道bundle会报错啊，你知道你还不改啊，你知道你不改你还把提示放的那么深啊。</p>
 <h2 id="in-‘to-number-amp-apos-undefined-method-‘new-amp-apos-for-BigDecimal-Class-NoMethodError"><a href="#in-‘to-number-amp-apos-undefined-method-‘new-amp-apos-for-BigDecimal-Class-NoMethodError" class="headerlink" title="in ‘to_number&amp;apos;: undefined method ‘new&amp;apos; for BigDecimal:Class (NoMethodError)"></a>in ‘to_number&amp;apos;: undefined method ‘new&amp;apos; for BigDecimal:Class (NoMethodError)</h2><p>这是为什么我也不知道，但是官方给了提示<code>bundle update github-pages</code><br>可能是版本过低？</p>
 <h2 id="Your-branch-is-ahead-of-amp-apos-origin-x2F-master-amp-apos-by-2-commits"><a href="#Your-branch-is-ahead-of-amp-apos-origin-x2F-master-amp-apos-by-2-commits" class="headerlink" title="Your branch is ahead of &amp;apos;origin&#x2F;master&amp;apos; by 2 commits"></a>Your branch is ahead of &amp;apos;origin&#x2F;master&amp;apos; by 2 commits</h2><p>这个是由于状态不一样造成的<br> <code>git fetch --all</code><br> <code>git pull</code><br> <code>git reset - -hard origin/master</code></p>
@@ -240,11 +238,7 @@
 <h1 id="好了好了，该结束了"><a href="#好了好了，该结束了" class="headerlink" title="好了好了，该结束了"></a>好了好了，该结束了</h1><p>如果你在能正常看到自己的网页，那就是对了的。<br>撒花撒花<br>不过现在只能在本地看，记得git到仓库里去。</p>
 <h1 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h1><h2 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h2><p>国际惯例，先放两个找颜色的网站<br><a target="_blank" rel="noopener" href="https://www.color-hex.com/">color-hex</a><br><a target="_blank" rel="noopener" href="http://tool.c7sky.com/webcolor/#hue_8">配色搭配表</a>  </p>
 <h3 id="行内代码高亮"><a href="#行内代码高亮" class="headerlink" title="行内代码高亮"></a>行内代码高亮</h3><p>不得不说，Next的行内代码高亮实在是太低调了，乍一看根本看不出来<br>修改<code>\_sass\_custom\custon.scss</code>文件，在里面添加（我的打开只有一句注释，原本有的话就修改）：</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">code </span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> #000000<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span>#ffffc1<span class="token punctuation">;</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span> 2px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">code</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#000000</span>;</span><br><span class="line">    <span class="attribute">background</span>:<span class="number">#ffffc1</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>把高亮背景改为了淡黄色</p>
 <h3 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h3><p>修改<code>\_sass\_common\components\highlight\theme.scss</code>文件，里面是每套高亮方案的配色<br>改来改去还是用回了经典的normal</p>
 <h1 id="后期问题"><a href="#后期问题" class="headerlink" title="后期问题"></a>后期问题</h1><h2 id="新上传的文章404了"><a href="#新上传的文章404了" class="headerlink" title="新上传的文章404了"></a>新上传的文章404了</h2><p>  莫名其妙404了，检查了一大波环境之后发现是分类的问题  </p>
@@ -264,13 +258,10 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/11/29/2020-11-29-ezPHP/" rel="prev" title="ezPHP">
-                  <i class="fa fa-chevron-left"></i> ezPHP
-                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/12/07/2020-12-7-%E8%BD%AC%E4%B8%93%E4%B8%9A/" rel="next" title="记转专业三个月">
-                  记转专业三个月 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/11/29/2020-11-29-ezPHP/" rel="next" title="ezPHP">
+                  ezPHP <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
