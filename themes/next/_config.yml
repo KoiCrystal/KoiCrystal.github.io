@@ -40,8 +40,8 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 # Schemes
-#scheme: Muse
-scheme: Mist
+scheme: Muse
+#scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
 
@@ -371,7 +371,7 @@ codeblock:
   copy_button:
     enable: false
     # Available values: default | flat | mac
-    style: mac
+    style: 
 
 back2top:
   enable: true
