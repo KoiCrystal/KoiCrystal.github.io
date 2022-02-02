@@ -15,7 +15,7 @@ Jekyll最大的优势就是方便，不依赖本地环境，所有代码都在�
 
 # Hexo
 `npm install hexo-cli -g`  
-`hexo init blog`创建一个名为blog的文件夹并生成博客框架，如果已经创建了文件夹，可以直接`hexo init`  
+`hexo init blog`创建一个名为blog的文件夹并生成博客框架，如果已经创建了文件夹，可以在文件夹中直接用`hexo init`生成博客框架  
 进入刚刚创建的文件夹  
 `npm install `
 
@@ -44,7 +44,7 @@ deploy:
 
 # NeXT
 这就是我换Hexo最大的理由了  
-切记切记，不要用7.x的那几个版本，那个因为原作者不在线而接手next的作者也不在线了，一个更新的作者接手了这个项目。我现在用的最新的8.9版本！  
+切记切记，不要用7.x的那几个版本，因为最初的作者不在线而接手next的作者也不在线了，一个更新的作者接手了这个项目。我现在用的最新的8.9版本！  
 [NeXT](https://theme-next.js.org/)  
 根据官网说法，在根目录创建名为`_config.next.yml`的文件，并将`/themes/next/_config.yml`的内容复制过去。之后要修改主题的配置也是在这里啦~
 虽然不知道要不要在`_config.yml`中修改为`theme: next`，但是改了总没错。
@@ -56,7 +56,7 @@ deploy:
 
 # 配色
 又是经典的配色问题，首先是行内代码块高亮改为淡黄色，在next8.9中，在`themes\next\source\css\_common\scaffolding\highlight\index.styl`中找到`code-inline`并修改为
-```
+```styl
 $code-inline {
   background: #ffffc1;
   color: var(--highlight-foreground);
