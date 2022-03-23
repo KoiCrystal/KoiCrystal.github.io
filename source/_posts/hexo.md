@@ -66,5 +66,16 @@ $code-inline {
 那我们就重新声明一下背景颜色，加入一句`background: white;`。（ps：声明颜色可以用十六进制，也可以用rgba，也可以直接写颜色）  
 大功告成！
 
+# 爷的categories和tags呢？
+侧边栏的categories和tags是点不动的
+实验：在`menu`中把`categories`的注释取消掉，发现在页面上方（不是侧边栏）出现了可以点的categories，但是点进去之后显示页面找不到。
+解决：先用命令`hexo new page categories`生成一个新的页面，在`source/categories/index.md`,此时文件头只有`title`和`date`，我们要加上`type`，即：
+```md
+title: 分类
+date: 2018-04-25 22:34:08
+type: "categories"
+```
+之后在`_config.next.yml`中找到`sidebar`部分的代码，在附近（不是里面）加上`categories: /categories/`和`tags: /tags/`（因为不属于任何代码块，所以加在哪里都可以，放在一起图个方便）
+
 # 跨设备使用
 留个坑吧，换电脑的时候再说

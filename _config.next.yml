@@ -135,6 +135,9 @@ avatar:
 
 # Posts / Categories / Tags in sidebar.
 site_state: true
+categories: /categories/
+tags: /tags/
+
 
 # Social Links
 # Usage: `Key: permalink || icon`
