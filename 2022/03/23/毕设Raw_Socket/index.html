@@ -28,7 +28,7 @@
 <meta property="og:description" content="欸嘿嘿，监听和攻击。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-23T13:08:48.992Z">
+<meta property="article:modified_time" content="2022-03-23T13:22:50.839Z">
 <meta property="article:author" content="HideonSky">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-03-23 00:00:00 / Modified: 21:08:48" itemprop="dateCreated datePublished" datetime="2022-03-23T00:00:00+08:00">2022-03-23</time>
+      <time title="Created: 2022-03-23 00:00:00 / Modified: 21:22:50" itemprop="dateCreated datePublished" datetime="2022-03-23T00:00:00+08:00">2022-03-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -219,7 +219,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="pcap"><a href="#pcap" class="headerlink" title="pcap"></a>pcap</h1><h2 id="pcap的安装"><a href="#pcap的安装" class="headerlink" title="pcap的安装"></a>pcap的安装</h2><p>留个坑哈哈哈哈</p>
+        <h1 id="pcap"><a href="#pcap" class="headerlink" title="pcap"></a>pcap</h1><h2 id="pcap的安装"><a href="#pcap的安装" class="headerlink" title="pcap的安装"></a>pcap的安装</h2><p><a target="_blank" rel="noopener" href="https://www.tcpdump.org/">pcap和tcpdump官网</a></p>
 <h2 id="生成程序"><a href="#生成程序" class="headerlink" title="生成程序"></a>生成程序</h2><p>（这里特地研究了一下运行任务<code>Run Task</code>和运行生成任务<code>Run Build Task</code>有啥区别，emmmmm，发现tasks文件是一样的）<br>在vscode里直接运行生成任务是跑不了的，会提示</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ld: symbol(s) not found for architecture x86_64</span><br><span class="line">clang: error: linker command failed with exit code 1 (use -v to see invocation)</span><br></pre></td></tr></table></figure>
 <p>此时我们需要熟悉一下原始的编译过程了<br>我写的是一个名为<code>raw.cpp</code>的程序，用命令<code>gcc -o raw raw.cpp -l pcap</code>即可编译成功。<br>其中，<code>-o</code>可以指定生成的可执行文件的文件名，此处就叫做<code>raw</code>（那个用于指定编译等级发布release版本的是<code>-O</code>，从<code>-O1</code>到<code>-O3</code>,数字越大性能越好）<br><code>-l</code>指定库名。在其他程序中，也有可能先用<code>-L</code>指定库的路径<br>其实在vscode里修改tasks文件也可以，不过为了一个程序修改tasks不太划算呀<br>运行时，用命令<code>sudo ./raw</code>来运行程序。(<code>./</code>表示当前目录)</p>
