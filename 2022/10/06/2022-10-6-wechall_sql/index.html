@@ -28,7 +28,7 @@
 <meta property="og:description" content="关于#和--在sql中的具体用法">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-06T08:10:59.550Z">
+<meta property="article:modified_time" content="2022-10-06T08:30:34.528Z">
 <meta property="article:author" content="HideonSky">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Web">
@@ -198,7 +198,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-06 00:00:00 / Modified: 16:10:59" itemprop="dateCreated datePublished" datetime="2022-10-06T00:00:00+08:00">2022-10-06</time>
+      <time title="Created: 2022-10-06 00:00:00 / Modified: 16:30:34" itemprop="dateCreated datePublished" datetime="2022-10-06T00:00:00+08:00">2022-10-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -221,8 +221,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="–和-的具体用法"><a href="#–和-的具体用法" class="headerlink" title="–和#的具体用法"></a>–和#的具体用法</h1><p><code>#</code>是php和sql中的注释，而<code>--</code>仅是sql语言中的注释,<code>--</code>在使用时后面必须有一个空格<br>原题代码为<code>$query = &quot;SELECT * FROM users WHERE username=&#39;$username&#39; AND password=&#39;$password&#39;&quot;;</code><br><code>admin&#39; and username=&#39;admin&#39;;#</code>       可以<br><code>admin&#39; and username=&#39;admin&#39;#</code>        不可以 ,结尾没有<code>;</code>，语句错误</p>
-<p><code>Admin&#39; -- yes i can</code>                 可以<br><code>Admin&#39; --yes i can</code>                  不可以，–后面没有空格<br><code>Admin&#39; --</code>                           不可以，–后面没有空格（后面的句子会顶上来）<br><code>Admin&#39; -- (a space here)</code>            可以</p>
+        <h1 id="–和-的具体用法"><a href="#–和-的具体用法" class="headerlink" title="–和#的具体用法"></a>–和#的具体用法</h1><p><code>#</code>是php和sql中的注释，而<code>--</code>仅是sql语言中的注释,<code>--</code>在使用时后面必须有一个空格<br>原题代码为<code>$query = &quot;SELECT * FROM users WHERE username=&#39;$username&#39; AND password=&#39;$password&#39;&quot;;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">admin&#x27; and username=&#x27;admin&#x27;;#       可以</span><br><span class="line">admin&#x27; and username=&#x27;admin&#x27;#        不可以 ,结尾没有`;`，语句错误</span><br><span class="line"></span><br><span class="line">Admin&#x27; -- yes i can                 可以</span><br><span class="line">Admin&#x27; --yes i can                  不可以，--后面没有空格</span><br><span class="line">Admin&#x27; --                           不可以，--后面没有空格（后面的句子会顶上来）</span><br><span class="line">Admin&#x27; -- (a space here)            可以</span><br></pre></td></tr></table></figure>
 <p>为什么<code>--</code>注释可以不用管最后的<code>;</code>呢？因为<code>--</code>只是sql中的注释语句。<br>此时完整的语句为<code>$query = &quot;SELECT * FROM users WHERE username=&#39;Admin&#39; -- yes i can&#39; AND password=&#39;$password&#39;&quot;;</code><br>sql在查询时被注释掉了，但整个php语句没有被注释掉
  </p>
 
