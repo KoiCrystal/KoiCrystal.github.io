@@ -28,7 +28,7 @@
 <meta property="og:description" content="NeXT毕竟是个Hexo的主题啊，Jekyll都多少年没更新了">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-23T11:44:39.333Z">
+<meta property="article:modified_time" content="2022-10-06T08:39:34.147Z">
 <meta property="article:author" content="HideonSky">
 <meta name="twitter:card" content="summary">
 
@@ -201,7 +201,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-03-23 19:44:39" itemprop="dateModified" datetime="2022-03-23T19:44:39+08:00">2022-03-23</time>
+      <time title="Modified: 2022-10-06 16:39:34" itemprop="dateModified" datetime="2022-10-06T16:39:34+08:00">2022-10-06</time>
     </span>
 
   
@@ -223,7 +223,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;your_repo_address&gt;</span><br></pre></td></tr></table></figure>
 <p>其实还有一句<code>branch: master</code>，但是不写这一句可以直接默认。<br>之后在pages的设置里修改source为<code>master</code>分支</p>
 <h1 id="NeXT"><a href="#NeXT" class="headerlink" title="NeXT"></a>NeXT</h1><p>这就是我换Hexo最大的理由了<br>切记切记，不要用7.x的那几个版本，因为最初的作者不在线而接手next的作者也不在线了，一个更新的作者接手了这个项目。我现在用的最新的8.9版本！<br><a target="_blank" rel="noopener" href="https://theme-next.js.org/">NeXT</a><br>根据官网说法，在根目录创建名为<code>_config.next.yml</code>的文件，并将<code>/themes/next/_config.yml</code>的内容复制过去。之后要修改主题的配置也是在这里啦~<br>虽然不知道要不要在<code>_config.yml</code>中修改为<code>theme: next</code>，但是改了总没错。</p>
-<h1 id="发文章"><a href="#发文章" class="headerlink" title="发文章"></a>发文章</h1><p>现在发文章就不像Jekyll一样直接push上去就完事了，要现在本地hexo生成一下。<br><code>hexo generate</code>或简写为<code>hexo g</code><br><code>hexo deploy</code>或简写为<code>hexo d</code></p>
+<h1 id="发文章"><a href="#发文章" class="headerlink" title="发文章"></a>发文章</h1><p>现在发文章就不像Jekyll一样直接push上去就完事了，要现在本地hexo生成一下（网站目录里的任意文件夹都可以）<br><code>hexo generate</code>或简写为<code>hexo g</code><br><code>hexo deploy</code>或简写为<code>hexo d</code></p>
 <h1 id="配色"><a href="#配色" class="headerlink" title="配色"></a>配色</h1><p>又是经典的配色问题，首先是行内代码块高亮改为淡黄色，在next8.9中，在<code>themes\next\source\css\_common\scaffolding\highlight\index.styl</code>中找到<code>code-inline</code>并修改为</p>
 <figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$code</span>-inline &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ffffc1</span>;</span><br><span class="line">  <span class="attribute">color</span>: var(--highlight-foreground);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这时候发现代码块也变成了淡黄色，发现下面的<code>code-block</code>直接<code>@extend $code-inline</code>，好家伙，作者是真省事啊。<br>那我们就重新声明一下背景颜色，加入一句<code>background: white;</code>。（ps：声明颜色可以用十六进制，也可以用rgba，也可以直接写颜色）<br>大功告成！</p>
