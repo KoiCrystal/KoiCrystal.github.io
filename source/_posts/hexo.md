@@ -50,7 +50,7 @@ deploy:
 虽然不知道要不要在`_config.yml`中修改为`theme: next`，但是改了总没错。
 
 # 发文章
-现在发文章就不像Jekyll一样直接push上去就完事了，要现在本地hexo生成一下。
+现在发文章就不像Jekyll一样直接push上去就完事了，要现在本地hexo生成一下（网站目录里的任意文件夹都可以）
 `hexo generate`或简写为`hexo g`
 `hexo deploy`或简写为`hexo d`
 
