@@ -13,7 +13,7 @@ tags:
 原题代码为`$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";`
 ```
 admin' ;#                           可以
-admin' #                            可以，说明#在sql中发挥作用而非在PHP中
+admin' #                            可以，sql中也使用分号划分语句
 admin' or 1=1;#                     不可以，此时没有以admin身份登录
 
 Admin' -- yes i can                 可以
