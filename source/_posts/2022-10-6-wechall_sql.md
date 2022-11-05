@@ -1,5 +1,5 @@
 ---
-title: WeChall_SQL
+title: WeChall
 date: 2022-10-06
 description: 关于#和--在sql中的具体用法
 category: 信息安全
@@ -9,8 +9,8 @@ tags:
   - SQL
 ---
 # --和#的具体用法
-`#`是php和sql中的注释，而`--`仅是sql语言中的注释,`--`在使用时后面必须有一个空格
-原题代码为`$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";`
+`#`是php和sql中的注释，而`--`仅是sql语言中的注释,`--`在使用时后面必须有一个空格  
+wechall原题是MySQL I，关键代码为`$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";`
 这里的`#`和`--`都不是在php语句中发挥作用，因此不用闭合双引号
 ```
 admin' ;#                           可以
